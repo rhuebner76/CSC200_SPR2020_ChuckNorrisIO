@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChuckNorrisIO.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Chuck Norris Jokes" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindowViewModel ></local:MainWindowViewModel>
+    </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Search"></TextBlock>
+                <TextBox Text="{Binding Path=CurrentQuery}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Category"></TextBlock>
+                <ComboBox ItemsSource="{Binding Path=Categories}" 
+                          SelectedItem="{Binding Path=CurrentCategory}">
+
+                </ComboBox>
+            </StackPanel>
+
+
+        </StackPanel>
+        <TextBlock Grid.Row="1" FontSize="18" 
+                   Background="Gainsboro" 
+                   TextAlignment="Center"
+                   TextWrapping="WrapWithOverflow"
+                   Text="{Binding Path=CurrentJoke}"></TextBlock>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Button Command="{Binding Path=NextJoke}">Next</Button>
+        </StackPanel>
     </Grid>
 </Window>
